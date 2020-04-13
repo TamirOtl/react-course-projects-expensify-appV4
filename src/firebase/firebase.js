@@ -1,80 +1,131 @@
-import * as firebase from "firebase";
+import * as firebase from 'firebase';
+
+var firebaseConfig = {
+  apiKey: "AIzaSyAmASq_l65dR58ZYpoX17dVWJQX0fI6MD4",
+  authDomain: "expensify-tamir.firebaseapp.com",
+  databaseURL: "https://expensify-tamir.firebaseio.com",
+  projectId: "expensify-tamir",
+  storageBucket: "expensify-tamir.appspot.com",
+  messagingSenderId: "948644208045",
+  appId: "1:948644208045:web:739176d730a595b6259524",
+  measurementId: "G-43PVK0BYYQ"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const database = firebase.database();
+
+export { firebase, database as default };
+
+// // child_removed
+// database.ref('expenses').on('child_removed', (snapshot) => {
+//   console.log(snapshot.key, snapshot.val());
+// });
+
+// // child_changed
+// database.ref('expenses').on('child_changed', (snapshot) => {
+//   console.log(snapshot.key, snapshot.val());
+// });
+
+// // child_added
+// database.ref('expenses').on('child_added', (snapshot) => {
+//   console.log(snapshot.key, snapshot.val());
+// });
+
+// // database.ref('expenses')
+// //   .once('value')
+// //   .then((snapshot) => {
+// //     const expenses = [];
+
+// //     snapshot.forEach((childSnapshot) => {
+// //       expenses.push({
+// //         id: childSnapshot.key,
+// //         ...childSnapshot.val()
+// //       });
+// //     });
+
+// //     console.log(expenses);
+// //   });
+
+// // database.ref('expenses').on('value', (snapshot) => {
+// //   const expenses = [];
+
+// //   snapshot.forEach((childSnapshot) => {
+// //     expenses.push({
+// //       id: childSnapshot.key,
+// //       ...childSnapshot.val()
+// //     });
+// //   });
+
+// //   console.log(expenses);
+// // });
+
+// database.ref('expenses').push({
+//   description: 'Rent',
+//   note: '',
+//   amount: 109500,
+//   createdAt: 976123498763
+// });
 
 
-const firebaseConfig = {
-    apiKey: "AIzaSyAmASq_l65dR58ZYpoX17dVWJQX0fI6MD4",
-    authDomain: "expensify-tamir.firebaseapp.com",
-    databaseURL: "https://expensify-tamir.firebaseio.com",
-    projectId: "expensify-tamir",
-    storageBucket: "expensify-tamir.appspot.com",
-    messagingSenderId: "948644208045",
-    appId: "1:948644208045:web:739176d730a595b6259524",
-    measurementId: "G-43PVK0BYYQ"
-  };
 
-  firebase.initializeApp(firebaseConfig);
-//refernce to the database
 
-const database= firebase.database();
-database.ref().set({
-    name:"tamir oberlander",
-    age:28,
-   
-    job:{
-        title:"information system",
-        company:"non working"
-    },
-    stressLevel:6,
-    isSingle:false,
-    location:{
-        city:"tel aviv",
-        state:"israel"
-    },
-   
-  }).then(()=>{
-      console.log("Data has been save!")
-  }).catch((e)=>{
-      console.log("Error:",e)
-  })
-//changing specifc value:
-  database.ref("age").set(27);
-  database.ref("location/city").set("Rishon Lezion");
-  //add new data to the firebase database
-  database.ref("attrbuites").set({
-    height:170,
-    weight:67
-  }).then(()=>{
-     console.log("Data save successfully!"); 
-  }).catch((error)=>{
-      console.log("somthing went wrong",error);
-  })
-  //remove data
-  database.ref("isSingle").remove().then(()=>{
-      console.log("Data remove successfully!")
-  }).catch((e1)=>{
-    console.log("somthing went wrong",e1);
-  })
-  //update data
-  database.ref().update({
-      "job/company":"Consist",
-      'location/city':"petah tikva",
-      stressLevel:9
-  }).then(()=>{
-    console.log("Data update successfully!")
-}).catch((e2)=>{
-  console.log("somthing went wrong",e2);
-})
 
-//fetching data
-// const onValueChange=database.ref().on("value",snapShot)=>{
-//     console.log(snapShot.val());
-// })
-// setTimeout(() => {
-//     console.log(onValueChange);
-// }, 1500);
 
-database.ref().on('value',(snapShot)=>{
-const val=snapShot.val();
-console.log(`hi my name is ${val.name} and i am ${val.age} and
-i work at ${val.job.company}`)
-})
+// // database.ref('notes/-Krll52aVDQ3X6dOtmS7').remove();
+
+// // database.ref('notes').push({
+// //   title: 'Course Topics',
+// //   body: 'React Native, Angular, Python'
+// // });
+
+// // database.ref().on('value', (snapshot) => {
+// //   const val = snapshot.val();
+// //   console.log(`${val.name} is a ${val.job.title} at ${val.job.company}`);
+// // })
+
+// // Setup data sub -> Andrew is a Software Developer at Amazon.
+
+// // Change the data and make sure it reprints
+
+// // database.ref('location/city')
+// //   .once('value')
+// //   .then((snapshot) => {
+// //     const val = snapshot.val();
+// //     console.log(val);
+// //   })
+// //   .catch((e) => {
+// //     console.log('Error fetching data', e);
+// //   });
+
+// // database.ref().set({
+// //   name: 'Andrew Mead',
+// //   age: 26,
+// //   stressLevel: 6,
+// //   job: {
+// //     title: 'Software developer',
+// //     company: 'Google'
+// //   },
+// //   location: {
+// //     city: 'Philadelphia',
+// //     country: 'United States'
+// //   }
+// // }).then(() => {
+// //   console.log('Data is saved!');
+// // }).catch((e) => {
+// //   console.log('This failed.', e);
+// // });
+
+// // database.ref().update({
+// //   stressLevel: 9,
+// //   'job/company': 'Amazon',
+// //   'location/city': 'Seattle'
+// // });
+
+// // database.ref()
+// //   .remove()
+// //   .then(() => {
+// //     console.log('Data was removed');
+// //   }).catch((e) => {
+// //     console.log('Did not remove data', e);
+// //   });

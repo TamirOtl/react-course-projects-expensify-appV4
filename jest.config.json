@@ -3,7 +3,8 @@
   "jest": {
     "setupFiles": [
     "<rootDir>/config/polyfills.js",
-     "raf/polyfill", "<rootDir>/src/setupTests.js" 
+     "raf/polyfill", "<rootDir>/src/setupTests.js" ,
+     "<rootDir>/src/tests/polysetupTests.js"
   ]},
   "snapshotSerializers": [
     "enzyme-to-json/serializer"
