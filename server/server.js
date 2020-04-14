@@ -11,6 +11,3 @@ app.get("*",(req,res)=>{
 app.listen(port,()=>{
    console.log("server is up!"); 
 });
-app.listen(port1,()=>{
-    console.log("server is up!"); 
- });
