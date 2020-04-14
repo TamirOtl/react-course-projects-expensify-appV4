@@ -1,23 +1,21 @@
 import * as firebase from 'firebase';
 
-var firebaseConfig = {
-  apiKey: "AIzaSyAmASq_l65dR58ZYpoX17dVWJQX0fI6MD4",
-  authDomain: "expensify-tamir.firebaseapp.com",
-  databaseURL: "https://expensify-tamir.firebaseio.com",
-  projectId: "expensify-tamir",
-  storageBucket: "expensify-tamir.appspot.com",
-  messagingSenderId: "948644208045",
-  appId: "1:948644208045:web:739176d730a595b6259524",
-  measurementId: "G-43PVK0BYYQ"
+const config = {
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.FIREBASE_DATABASE_URL,
+  projectId: process.env.FIREBASE_PROJECT_ID,
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID
 };
 
-firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(config);
 
 const database = firebase.database();
 const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
+export { firebase, googleAuthProvider, database as default };
 
-export { firebase ,googleAuthProvider, database as default };
 // // child_removed
 // database.ref('expenses').on('child_removed', (snapshot) => {
 //   console.log(snapshot.key, snapshot.val());
